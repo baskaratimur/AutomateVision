@@ -13,4 +13,4 @@ class LoginObject:
         self.popLoginUnregistered = "//h3[contains(text(),'This account has not been registered.')]"
         self.popUnregistered = "//h3[contains(text(),'This account has not been registered.')]"
         # element myprofile paling kiri
-        self.myProfile = "(//div[@class='profiles-container lessThanRow']//div//div//div//img)[1]"
+        self.myProfile = "(//div[@class='profile-item'])[1]"

@@ -13,73 +13,73 @@ def driver():
     yield setup_driver.driver
     setup_driver.driver.quit()
 
-def test_loginPhonePanjang(driver):
+def test_loginPhoneMaxCharacters(driver):
     login = LoginPage(driver)
-    login.open()
-    login.goToLogin()
+    login.openWebsite()
+    login.clickButtonToLogin()
     login.inputFormLoginHP("899777583838383", "1234AAaa")
     assert login.assertButtonLoginDisabled()
 
 def test_phoneEmpty(driver):
     login = LoginPage(driver)
-    login.open()
-    login.goToLogin()
+    login.openWebsite()
+    login.clickButtonToLogin()
     login.inputFormLoginHP(" ", " ")
     assert login.assertButtonLoginDisabled()
 
-def test_phoneDikit(driver):
+def test_phoneSmallCharacters(driver):
     login = LoginPage(driver)
-    login.open()
-    login.goToLogin()
+    login.openWebsite()
+    login.clickButtonToLogin()
     login.inputFormLoginHP("899777", " ")
     assert login.assertButtonLoginDisabled()
 
 def test_loginUnregistered(driver):
     login = LoginPage(driver)
-    login.open()
-    login.goToLogin()
+    login.openWebsite()
+    login.clickButtonToLogin()
     login.inputFormLoginHP("899777858585", "1234AAaa")
-    login.clickButtonLogin()
+    login.clickLogin()
     assert login.assertLoginUnregistered()
 
 def test_emailEmpty(driver):
     login = LoginPage(driver)
-    login.open()
-    login.goToLogin()
+    login.openWebsite()
+    login.clickButtonToLogin()
     login.inputFormEmail(" ", " ")
     assert login.assertButtonLoginDisabled()
 
 def test_inccorectEmailFormat(driver):
     login = LoginPage(driver)
-    login.open()
-    login.goToLogin()
+    login.openWebsite()
+    login.clickButtonToLogin()
     login.inputFormEmail("baskara@gmail", " ")
     assert login.assertInccorectFormat()
 
 def test_unregisteredEmail(driver):
     login = LoginPage(driver)
-    login.open()
-    login.goToLogin()
+    login.openWebsite()
+    login.clickButtonToLogin()
     login.inputFormEmail("baskara9023@gmail.com", "1234AAaa")
-    login.clickButtonLogin()
+    login.clickLogin()
     assert login.assertLoginUnregistered()
 
 def test_loginWrongPW(driver):
     login = LoginPage(driver)
-    login.open()
-    login.clickLogin('8997775838', 'passwordsalah')
+    login.openWebsite()
+    login.loginUser('8997775838', 'passwordsalah')
     assert login.assertWrongPassword()
-    login.closeBrowser()
+    
 
-def test_loginSukses(driver):
+def test_loginSucces(driver):
     login = LoginPage(driver)
-    login.open()
-    with open('testdata/config.json') as json_file:
+    login.openWebsite()
+    with open('testdata/dataUser.json') as json_file:
         data = json.load(json_file)
     username = data["username"]
     password = data["password"]
-    login.clickLogin(username, password)
-    assert login.assertSuccessLogin()
-    login.closeBrowser()
+    login.loginUser(username, password)
+    assert login.assertSuccessLogin() == True, "Fail to Login"
+    
 
 

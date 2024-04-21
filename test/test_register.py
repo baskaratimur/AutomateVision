@@ -76,7 +76,7 @@ def test_registerEmailSuccess(driver):
     register.inputFormRegisEmail(username, password)
     register.clickSendOTP()
     register.clickButtonRegister(username)
-    assert register.assertDiscoverProfile()
+    assert register.assertDiscoverProfile(), "Register Fail"
 
 
 def test_accountRegistered(driver):
