@@ -2,3 +2,4 @@ testdata/config.json
 api.py
 utils/generate.py
 main.py
+testdata/datauser.json
