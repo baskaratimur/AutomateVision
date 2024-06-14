@@ -71,9 +71,13 @@ class LoginPage:
     
     def assertButtonLoginDisabled(self):
         buttonLogin = self.driver.find_element(By.XPATH, self.login.form_buttonLogin)
-        if buttonLogin.is_enabled():
+        adaKelasDisabled = 'btn-disabled' in buttonLogin.get_attribute('class')
+        print(adaKelasDisabled)
+        if adaKelasDisabled == True:
+            print("ini dieksekusi dulu")
             return True
         else:
+            print("button login disabled")
             return False
     
     def assertLoginUnregistered(self):
@@ -85,11 +89,11 @@ class LoginPage:
         try:
             # validasi profil
             self.wait.until(EC.visibility_of_element_located((By.XPATH, self.login.myProfile)))
+            print("assert success login")
             return True
+            
         except:
             return False
-      
-            
       
     def assertWrongPassword(self):
         return self.driver.find_element(By.XPATH, self.login.popWrongPW)
